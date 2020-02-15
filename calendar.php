@@ -42,7 +42,7 @@ for($r=0;$r<$rows;$r++){
 
 $index_of_row = 0;
 
-for($i=1;$i<$days;$i++){
+for($i=1;$i<=$days;$i++){
 
 	$date = "$year-$month-$i";
 	$place = getWeekday($date);
@@ -55,13 +55,23 @@ return $calendar;
 };
 
 function output_calendar($month, $year){
-
+  $daynames = ["", "Sun", "Mon", "Tue",
+  "Thu", "Fri", "Sat"];
   $cal = calendar($month, $year);
   $html = "<table border='1'>";
   for ($r=0;$r<count($cal);$r++){
-    $html.="<tr>";
+     $html.="<tr>";
+    if ($r==0){
+   
+    for ($d=1;$d<8;$d++){
+      $html .= "<td>" . $daynames[$d] . "</td>";
+    };
+
+    };
+    if ($r>0){
     for ($d=1;$d<8;$d++){
       $html.="<td>" . $cal[$r][$d]["date"] . "</td>";
+    };
     };
     $html .= "</tr>";
   };
